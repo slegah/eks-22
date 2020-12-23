@@ -80,6 +80,29 @@ eksctl create nodegroup --cluster=myeks22 \
                         --alb-ingress-access 
 ```
 
+## Step-04b: Alternatively, Create Node Group with additional Add-Ons in Private Subnets
+- These add-ons will create the respective IAM policies for us automatically within our Node Group role.
+ ```
+# Create Public Node Group   
+eksctl create nodegroup --cluster=myeks22 \
+                        --region=us-east-1 \
+                        --name=myeks22-ng-private1 \
+                        --node-type=t3.medium \
+                        --nodes=2 \
+                        --nodes-min=2 \
+                        --nodes-max=14 \
+                        --node-volume-size=20 \
+                        --ssh-access \
+                        --ssh-public-key=eks \
+                        --managed \
+                        --asg-access \
+                        --external-dns-access \
+                        --full-ecr-access \
+                        --appmesh-access \
+                        --alb-ingress-access \
+                        --mode-private-networking
+```
+
 ## Step-05: Verify Cluster & Nodes
 
 ### Verify NodeGroup subnets to confirm EC2 Instances are in Public Subnet
